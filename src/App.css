@@ -1895,7 +1895,19 @@ ul.loc-dt li span:last-child {
 .blg-bx a {
     margin-top: 10px;
 }
+.lng-slct {
+    display: inline-block;
+}
 
+.lng-slct select {
+    width: 46px;
+    min-height: 33.75px;
+    border-radius: 6px;
+    background-color: #0266ef;
+    color: #fff;
+    border: none;
+    padding: 2px 4px;
+}
 
 /**************************/
 

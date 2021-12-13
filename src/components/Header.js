@@ -133,6 +133,12 @@ export class Header extends Component {
                             <div className="menu-btn">
                                 <a className="mail" href="mailto:info@sword-capital.com"><img src={Mail} alt="mail" /> info@sword-capital.com </a>
                                 <LogDiv />
+                                <div class="lng-slct">
+                                    <select name="lngSlct" id="lngSlct">
+                                        <option>en</option>
+                                        <option>ar</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         </div>
@@ -358,6 +364,12 @@ export class InnerHeader extends Component {
                             <div className="menu-btn">
                                 <a className="mail" href="mailto:info@sword-capital.com"><img src={Mail} alt="mail" /> info@sword-capital.com </a>
                                 <LogDiv />
+                                <div class="lng-slct">
+                                    <select name="lngSlct" id="lngSlct">
+                                        <option>en</option>
+                                        <option>ar</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         </div>
