@@ -2,21 +2,33 @@ import React, { Component } from 'react';
 import InnerBanner from './InnerBanner';
 import SwordIcon from '../assets/sword-icon.png';
 import axios from 'axios';
+import UrlService from '../../Service';
 
 export default class Workshop extends Component {
     state = {
         details: [],
         isLoaded: false
     }
-
+    
     componentDidMount() {
+        const apiURLs = {
+            'en':'pages6013',
+            'ar':'pages/6435',
+        }
+        this.resolve(apiURLs);
         window.scrollTo(0, 0);
-        axios.get('https://www.sword-capital.com/dev/wp/wp-json/wp/v2/pages?slug=introducing-brokers-2')
-            .then(res => this.setState({
-                details: res.data,
+    }
+
+    async resolve(apiURL) {
+        try {
+            const Response = await UrlService.getData(apiURL);
+            this.setState({
+                details: Response.data,
                 isLoaded: true
-            }))
-            .catch(err => console.log(err));
+            })   
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     constructor(props) {

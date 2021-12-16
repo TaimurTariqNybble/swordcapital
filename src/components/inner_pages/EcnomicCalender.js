@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import InnerBanner from './InnerBanner';
 import SwordIcon from '../assets/sword-icon.png';
 import axios from 'axios';
-
+import CustomCookieHelper from '../Helper';
+import UrlService from '../../Service';
 export default class EcnomicCalender extends Component {
 
 
@@ -12,19 +13,31 @@ export default class EcnomicCalender extends Component {
         isLoaded: false
     }
 
-    componentDidMount () {
+    componentDidMount() {
+        const apiURLs = {
+            'en':'pages/6029',
+            'ar':'pages/6386',
+        }
+        this.resolve(apiURLs);
         window.scrollTo(0, 0);
-        axios.get('https://www.sword-capital.com/dev/wp/wp-json/wp/v2/pages?slug=economic-calendar-2')
-            .then(res => this.setState({
-                details: res.data,
+    }
+
+    async resolve(apiURL) {
+        try {
+            const Response = await UrlService.getData(apiURL);
+            this.setState({
+                details: Response.data,
                 isLoaded: true
-            }))
-            .catch(err => console.log(err));
-        
+            })   
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     render() {
-        const { details, isLoaded } = this.state;
+        const details = [];
+        details[0] = this.state.details;
+        const { isLoaded } = this.state;
         if (isLoaded) {
 
         const iframe = '<iframe width="750px" height="1500px" style="max-width:100%;" src="https://www.tradays.com/en/economic-calendar/widget?mode=2&utm_source=www.sword-capital.com" frameborder="0"></iframe>s';

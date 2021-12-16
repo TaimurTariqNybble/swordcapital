@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 import SwordIcon from './assets/sword-icon.png';
 import axios from 'axios';
 import CustomCookieHelper from './Helper';
+import UrlService from '../Service';
 
 export default class HomePage extends Component {
     state = {
@@ -14,24 +15,30 @@ export default class HomePage extends Component {
     }
 
     componentDidMount() {
-        const selectedLang = CustomCookieHelper.HelperGetLang("selectLang");
         const apiURLs = {
-            'en':'https://www.sword-capital.com/dev/wp/wp-json/wp/v2/pages?slug=home',
-            'ar':'https://www.sword-capital.com/dev/wp/wp-json/wp/v2/pages?slug=home',
-        }
-        const apiURL = apiURLs[selectedLang];
+            'en':'pages/5964',
+            'ar':'pages/5964',
+        }        
+        this.resolve(apiURLs);
         window.scrollTo(0, 0);
-        axios.get(apiURL)
-            .then(res => this.setState({
-                details: res.data,
+    }
+
+    async resolve(apiURL) {
+        try {
+            const Response = await UrlService.getData(apiURL);
+            this.setState({
+                details: Response.data,
                 isLoaded: true
-            }))
-            .catch(err => console.log(err));
+            })   
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     render() {
-
-        const { details, isLoaded } = this.state;
+        const details = [];
+        details[0] = this.state.details;
+        const { isLoaded } = this.state;
         if (isLoaded) {
 
             const Bannerimg = details[0].acf.banner;

@@ -3,7 +3,8 @@ import InnerBanner from './InnerBanner';
 import SwordIcon from '../assets/sword-icon.png';
 import axios from 'axios';
 import { Link } from "react-router-dom";
-
+import CustomCookieHelper from '../Helper';
+import UrlService from '../../Service';
 export class InvestAffairs extends Component {
     state = {
         details: [],
@@ -11,13 +12,24 @@ export class InvestAffairs extends Component {
     }
 
     componentDidMount() {
+        const apiURLs = {
+            'en':'investor_affair',
+            'ar':'investor_affair',
+        }
+        this.resolve(apiURLs);
         window.scrollTo(0, 0);
-        axios.get('https://www.sword-capital.com/dev/wp/wp-json/wp/v2/investor_affair')
-            .then(res => this.setState({
-                details: res.data,
+    }
+
+    async resolve(apiURL) {
+        try {
+            const Response = await UrlService.getData(apiURL);
+            this.setState({
+                details: Response.data,
                 isLoaded: true
-            }))
-            .catch(err => console.log(err));
+            })   
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     render() {

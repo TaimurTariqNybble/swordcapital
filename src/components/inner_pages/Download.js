@@ -5,6 +5,7 @@ import {
   } from "react-router-dom";
 import SwordIcon from '../assets/sword-icon.png';
 import axios from 'axios';
+import UrlService from '../../Service';
 
 export class Download extends Component {
     state = {
@@ -13,13 +14,24 @@ export class Download extends Component {
     }
 
     componentDidMount() {
+        const apiURLs = {
+            'en':'pages',
+            'ar':'pages',
+        }
+        this.resolve(apiURLs);
         window.scrollTo(0, 0);
-        axios.get('https://www.sword-capital.com/dev/wp/wp-json/wp/v2/pages')
-            .then(res => this.setState({
-                details: res.data,
+    }
+
+    async resolve(apiURL) {
+        try {
+            const Response = await UrlService.getData(apiURL);
+            this.setState({
+                details: Response.data,
                 isLoaded: true
-            }))
-            .catch(err => console.log(err));
+            })   
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     render() {
@@ -108,13 +120,24 @@ export class MetaTrader5 extends Component {
     }
 
     componentDidMount() {
+        const apiURLs = {
+            'en':'pages',
+            'ar':'pages',
+        }
+        this.resolve(apiURLs);
         window.scrollTo(0, 0);
-        axios.get('https://www.sword-capital.com/wp-json/wp/v2/pages')
-            .then(res => this.setState({
-                details: res.data,
+    }
+
+    async resolve(apiURL) {
+        try {
+            const Response = await UrlService.getData(apiURL);
+            this.setState({
+                details: Response.data,
                 isLoaded: true
-            }))
-            .catch(err => console.log(err));
+            })   
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     render() {
@@ -195,13 +218,24 @@ export class TwsPlatform extends Component {
     }
 
     componentDidMount() {
+        const apiURLs = {
+            'en':'pages',
+            'ar':'pages',
+        }
+        this.resolve(apiURLs);
         window.scrollTo(0, 0);
-        axios.get('https://www.sword-capital.com/wp-json/wp/v2/pages')
-            .then(res => this.setState({
-                details: res.data,
+    }
+
+    async resolve(apiURL) {
+        try {
+            const Response = await UrlService.getData(apiURL);
+            this.setState({
+                details: Response.data,
                 isLoaded: true
-            }))
-            .catch(err => console.log(err));
+            })   
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     render() {

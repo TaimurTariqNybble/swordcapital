@@ -144,7 +144,7 @@ export class Header extends Component {
                             <div className="menu-btn">
                                 <a className="mail" href="mailto:info@sword-capital.com"><img src={Mail} alt="mail" /> info@sword-capital.com </a>
                                 <LogDiv />
-                                <div class="lng-slct">
+                                <div className="lng-slct">
                                     <select value={this.state.selectedLang} name="lngSlct" id="lngSlct" onChange={this.ChangeLang}>
                                         <option value="en">en</option>
                                         <option value="ar">ar</option>
@@ -251,14 +251,24 @@ export class InnerHeader extends Component {
         super(props);
         this.state = {
             menuToggle: true,
+            selectedLang: CustomCookieHelper.HelperGetLang("selectLang")
         };
         this.MenuClick = this.MenuClick.bind(this);
+        this.ChangeLang = this.ChangeLang.bind(this);
     }
     MenuClick () {
         this.setState(state => ({
             menuToggle: !state.menuToggle
         }));
     }
+    ChangeLang (e) {
+        this.setState({ selectedLang: e.target.value });
+        CustomCookieHelper.HelperSetCookie('selectLang', e.target.value,30);
+
+        // reload the page
+        window.location.reload();
+    }
+
     componentDidMount(){
         window.addEventListener('scroll', () => {
            let activeClass = 'MenuFixed';
@@ -376,9 +386,9 @@ export class InnerHeader extends Component {
                                 <a className="mail" href="mailto:info@sword-capital.com"><img src={Mail} alt="mail" /> info@sword-capital.com </a>
                                 <LogDiv />
                                 <div class="lng-slct">
-                                    <select name="lngSlct" id="lngSlct">
-                                        <option>en</option>
-                                        <option>ar</option>
+                                    <select value={this.state.selectedLang} name="lngSlct" id="lngSlct" onChange={this.ChangeLang}>
+                                        <option value="en">en</option>
+                                        <option value="ar">ar</option>
                                     </select>
                                 </div>
                             </div>

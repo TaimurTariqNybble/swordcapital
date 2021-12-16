@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import InnerBanner from './InnerBanner';
 import SwordIcon from '../assets/sword-icon.png';
 import axios from 'axios';
-
+import CustomCookieHelper from '../Helper';
+import UrlService from '../../Service';
 export class About extends Component {
     state = {
         details: [],
@@ -10,37 +11,49 @@ export class About extends Component {
     }
 
     componentDidMount() {
+        const apiURLs = {
+            'en': 'pages/6031',
+            'ar': 'pages/6375',
+        }
+        this.resolve(apiURLs);
         window.scrollTo(0, 0);
-        axios.get('https://www.sword-capital.com/dev/wp/wp-json/wp/v2/pages?slug=about-sword-capital')
-            .then(res => this.setState({
-                details: res.data,
+    }
+
+    async resolve(apiURL) {
+        try {
+            const Response = await UrlService.getData(apiURL);
+            this.setState({
+                details: Response.data,
                 isLoaded: true
-            }))
-            .catch(err => console.log(err));
+            })
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     render() {
-
-        const { details, isLoaded } = this.state;
+        const details = [];
+        details[0] = this.state.details;
+        const { isLoaded } = this.state;
         if (isLoaded) {
-            
+
             document.title = `Sword Capital | ${details[0].title.rendered}`;
+            return (
+                <>
+                    <InnerBanner img="url(https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/07/ABOUT-SWORD.jpg)" title={details[0].title.rendered} />
+                    <div className="inner-pages-text content-area">
+                        <div dangerouslySetInnerHTML={{ __html: details[0].content.rendered }} />
+                    </div>
+                </>
+            )
+        }
         return (
             <>
-                <InnerBanner img="url(https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/07/ABOUT-SWORD.jpg)" title={details[0].title.rendered} />
-                <div className="inner-pages-text content-area">
-                <div dangerouslySetInnerHTML={{__html: details[0].content.rendered}}/>
+                <div className="loaderBg">
+                    <span><img src={SwordIcon} alt="" /></span>
                 </div>
             </>
         )
-    }
-    return (
-        <>
-            <div className="loaderBg">
-                <span><img src={SwordIcon} alt=""/></span>
-            </div>
-        </>
-    )
     }
 }
 
@@ -51,37 +64,50 @@ export class Regulation extends Component {
     }
 
     componentDidMount() {
+        const apiURLs = {
+            'en': 'pages/6033',
+            'ar': 'pages/6384',
+        }
+        this.resolve(apiURLs);
         window.scrollTo(0, 0);
-        axios.get('https://www.sword-capital.com/dev/wp/wp-json/wp/v2/pages?slug=conditions-of-use-2')
-            .then(res => this.setState({
-                details: res.data,
+    }
+
+    async resolve(apiURL) {
+        try {
+            const Response = await UrlService.getData(apiURL);
+            this.setState({
+                details: Response.data,
                 isLoaded: true
-            }))
-            .catch(err => console.log(err));
+            })
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     render() {
 
-        const { details, isLoaded } = this.state;
+        const details = [];
+        details[0] = this.state.details;
+        const { isLoaded } = this.state;
         if (isLoaded) {
-            
+
             document.title = `Sword Capital | ${details[0].title.rendered}`;
+            return (
+                <>
+                    <InnerBanner img="url(https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/07/CONDITIONS-OF-USE.jpg)" title={details[0].title.rendered} />
+                    <div className="inner-pages-text content-area">
+                        <div dangerouslySetInnerHTML={{ __html: details[0].content.rendered }} />
+                    </div>
+                </>
+            )
+        }
         return (
             <>
-                <InnerBanner img="url(https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/07/CONDITIONS-OF-USE.jpg)" title={details[0].title.rendered} />
-                <div className="inner-pages-text content-area">
-                <div dangerouslySetInnerHTML={{__html: details[0].content.rendered}}/>
+                <div className="loaderBg">
+                    <span><img src={SwordIcon} alt="" /></span>
                 </div>
             </>
         )
-    }
-    return (
-        <>
-            <div className="loaderBg">
-                <span><img src={SwordIcon} alt=""/></span>
-            </div>
-        </>
-    )
     }
 }
 
@@ -92,37 +118,50 @@ export class RiskDisclose extends Component {
     }
 
     componentDidMount() {
+        const apiURLs = {
+            'en': 'pages/6035',
+            'ar': 'pages/6419',
+        }
+        this.resolve(apiURLs);
         window.scrollTo(0, 0);
-        axios.get('https://www.sword-capital.com/dev/wp/wp-json/wp/v2/pages?slug=risk-disclosure-2')
-            .then(res => this.setState({
-                details: res.data,
+    }
+
+    async resolve(apiURL) {
+        try {
+            const Response = await UrlService.getData(apiURL);
+            this.setState({
+                details: Response.data,
                 isLoaded: true
-            }))
-            .catch(err => console.log(err));
+            })
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     render() {
 
-        const { details, isLoaded } = this.state;
+        const details = [];
+        details[0] = this.state.details;
+        const { isLoaded } = this.state;
         if (isLoaded) {
-            
+
             document.title = `Sword Capital | ${details[0].title.rendered}`;
+            return (
+                <>
+                    <InnerBanner img="url(https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/07/RISK-DISCLOSURE.jpg)" title={details[0].title.rendered} />
+                    <div className="inner-pages-text content-area">
+                        <div dangerouslySetInnerHTML={{ __html: details[0].content.rendered }} />
+                    </div>
+                </>
+            )
+        }
         return (
             <>
-                <InnerBanner img="url(https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/07/RISK-DISCLOSURE.jpg)" title={details[0].title.rendered} />
-                <div className="inner-pages-text content-area">
-                <div dangerouslySetInnerHTML={{__html: details[0].content.rendered}}/>
+                <div className="loaderBg">
+                    <span><img src={SwordIcon} alt="" /></span>
                 </div>
             </>
         )
-    }
-    return (
-        <>
-            <div className="loaderBg">
-                <span><img src={SwordIcon} alt=""/></span>
-            </div>
-        </>
-    )
     }
 }
 
@@ -133,37 +172,50 @@ export class PrivacyPolicy extends Component {
     }
 
     componentDidMount() {
+        const apiURLs = {
+            'en': 'pages/6037',
+            'ar': 'pages/6401',
+        }
+        this.resolve(apiURLs);
         window.scrollTo(0, 0);
-        axios.get('https://www.sword-capital.com/dev/wp/wp-json/wp/v2/pages?slug=privacy-policy')
-            .then(res => this.setState({
-                details: res.data,
+    }
+
+    async resolve(apiURL) {
+        try {
+            const Response = await UrlService.getData(apiURL);
+            this.setState({
+                details: Response.data,
                 isLoaded: true
-            }))
-            .catch(err => console.log(err));
+            })
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     render() {
 
-        const { details, isLoaded } = this.state;
+        const details = [];
+        details[0] = this.state.details;
+        const { isLoaded } = this.state;
         if (isLoaded) {
-            
+
             document.title = `Sword Capital | ${details[0].title.rendered}`;
+            return (
+                <>
+                    <InnerBanner img="https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/07/PRIVACY-POLICY.jpg" title={details[0].title.rendered} />
+                    <div className="inner-pages-text content-area">
+                        <div dangerouslySetInnerHTML={{ __html: details[0].content.rendered }} />
+                    </div>
+                </>
+            )
+        }
         return (
             <>
-                <InnerBanner img="https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/07/PRIVACY-POLICY.jpg" title={details[0].title.rendered} />
-                <div className="inner-pages-text content-area">
-                <div dangerouslySetInnerHTML={{__html: details[0].content.rendered}}/>
+                <div className="loaderBg">
+                    <span><img src={SwordIcon} alt="" /></span>
                 </div>
             </>
         )
-    }
-    return (
-        <>
-            <div className="loaderBg">
-                <span><img src={SwordIcon} alt=""/></span>
-            </div>
-        </>
-    )
     }
 }
 
@@ -174,37 +226,50 @@ export class FeeLimit extends Component {
     }
 
     componentDidMount() {
+        const apiURLs = {
+            'en': 'pages/6041',
+            'ar': 'pages/6413',
+        }
+        this.resolve(apiURLs);
         window.scrollTo(0, 0);
-        axios.get('https://www.sword-capital.com/dev/wp/wp-json/wp/v2/pages?slug=fees-and-limits')
-            .then(res => this.setState({
-                details: res.data,
+    }
+
+    async resolve(apiURL) {
+        try {
+            const Response = await UrlService.getData(apiURL);
+            this.setState({
+                details: Response.data,
                 isLoaded: true
-            }))
-            .catch(err => console.log(err));
+            })
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     render() {
 
-        const { details, isLoaded } = this.state;
+        const details = [];
+        details[0] = this.state.details;
+        const { isLoaded } = this.state;
         if (isLoaded) {
-            
+
             document.title = `Sword Capital | ${details[0].title.rendered}`;
+            return (
+                <>
+                    <InnerBanner title={details[0].title.rendered} />
+                    <div className="inner-pages-text content-area">
+                        <div dangerouslySetInnerHTML={{ __html: details[0].content.rendered }} />
+                    </div>
+                </>
+            )
+        }
         return (
             <>
-                <InnerBanner title={details[0].title.rendered} />
-                <div className="inner-pages-text content-area">
-                <div dangerouslySetInnerHTML={{__html: details[0].content.rendered}}/>
+                <div className="loaderBg">
+                    <span><img src={SwordIcon} alt="" /></span>
                 </div>
             </>
         )
-    }
-    return (
-        <>
-            <div className="loaderBg">
-                <span><img src={SwordIcon} alt=""/></span>
-            </div>
-        </>
-    )
     }
 }
 
@@ -213,39 +278,52 @@ export class TheBoard extends Component {
         details: [],
         isLoaded: false
     }
-
+    
     componentDidMount() {
+        const apiURLs = {
+            'en': 'pages/6045',
+            'ar': 'pages/6427',
+        }
+        this.resolve(apiURLs);
         window.scrollTo(0, 0);
-        axios.get('https://www.sword-capital.com/dev/wp/wp-json/wp/v2/pages?slug=the-board')
-            .then(res => this.setState({
-                details: res.data,
+    }
+
+    async resolve(apiURL) {
+        try {
+            const Response = await UrlService.getData(apiURL);
+            this.setState({
+                details: Response.data,
                 isLoaded: true
-            }))
-            .catch(err => console.log(err));
+            })
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     render() {
 
-        const { details, isLoaded } = this.state;
+        const details = [];
+        details[0] = this.state.details;
+        const { isLoaded } = this.state;
         if (isLoaded) {
-            
+
             document.title = `Sword Capital | ${details[0].title.rendered}`;
+            return (
+                <>
+                    <InnerBanner title={details[0].title.rendered} />
+                    <div className="inner-pages-text content-area">
+                        <div dangerouslySetInnerHTML={{ __html: details[0].content.rendered }} />
+                    </div>
+                </>
+            )
+        }
         return (
             <>
-                <InnerBanner title={details[0].title.rendered} />
-                <div className="inner-pages-text content-area">
-                <div dangerouslySetInnerHTML={{__html: details[0].content.rendered}}/>
+                <div className="loaderBg">
+                    <span><img src={SwordIcon} alt="" /></span>
                 </div>
             </>
         )
-    }
-    return (
-        <>
-            <div className="loaderBg">
-                <span><img src={SwordIcon} alt=""/></span>
-            </div>
-        </>
-    )
     }
 }
 
@@ -255,39 +333,52 @@ export class Complaint extends Component {
         details: [],
         isLoaded: false
     }
-
+    
     componentDidMount() {
+        const apiURLs = {
+            'en': 'pages/6048',
+            'ar': 'pages/6380',
+        }
+        this.resolve(apiURLs);
         window.scrollTo(0, 0);
-        axios.get('https://www.sword-capital.com/dev/wp/wp-json/wp/v2/pages?slug=complaints')
-            .then(res => this.setState({
-                details: res.data,
+    }
+
+    async resolve(apiURL) {
+        try {
+            const Response = await UrlService.getData(apiURL);
+            this.setState({
+                details: Response.data,
                 isLoaded: true
-            }))
-            .catch(err => console.log(err));
+            })
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     render() {
 
-        const { details, isLoaded } = this.state;
+        const details = [];
+        details[0] = this.state.details;
+        const { isLoaded } = this.state;
         if (isLoaded) {
-            
+
             document.title = `Sword Capital | ${details[0].title.rendered}`;
+            return (
+                <>
+                    <InnerBanner title={details[0].title.rendered} />
+                    <div className="inner-pages-text content-area">
+                        <div dangerouslySetInnerHTML={{ __html: details[0].content.rendered }} />
+                    </div>
+                </>
+            )
+        }
         return (
             <>
-                <InnerBanner title={details[0].title.rendered} />
-                <div className="inner-pages-text content-area">
-                <div dangerouslySetInnerHTML={{__html: details[0].content.rendered}}/>
+                <div className="loaderBg">
+                    <span><img src={SwordIcon} alt="" /></span>
                 </div>
             </>
         )
-    }
-    return (
-        <>
-            <div className="loaderBg">
-                <span><img src={SwordIcon} alt=""/></span>
-            </div>
-        </>
-    )
     }
 }
 
@@ -297,40 +388,53 @@ export class SwordGover extends Component {
         details: [],
         isLoaded: false
     }
-
+    6043
     componentDidMount() {
+        const apiURLs = {
+            'en': 'pages/6043',
+            'ar': 'pages/6421',
+        }
+        this.resolve(apiURLs);
         window.scrollTo(0, 0);
-        axios.get('https://www.sword-capital.com/dev/wp/wp-json/wp/v2/pages?slug=swords-governance')
-            .then(res => this.setState({
-                details: res.data,
+    }
+
+    async resolve(apiURL) {
+        try {
+            const Response = await UrlService.getData(apiURL);
+            this.setState({
+                details: Response.data,
                 isLoaded: true
-            }))
-            .catch(err => console.log(err));
+            })
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     render() {
 
-        const { details, isLoaded } = this.state;
+        const details = [];
+        details[0] = this.state.details;
+        const { isLoaded } = this.state;
         if (isLoaded) {
-            
+
             document.title = `Sword Capital | ${details[0].title.rendered}`;
+            return (
+                <>
+                    <InnerBanner title={details[0].title.rendered} />
+                    <div className="inner-pages-text content-area">
+                        <div dangerouslySetInnerHTML={{ __html: details[0].content.rendered }} />
+                    </div>
+
+                </>
+            )
+        }
         return (
             <>
-                <InnerBanner title={details[0].title.rendered} />
-                <div className="inner-pages-text content-area">
-                <div dangerouslySetInnerHTML={{__html: details[0].content.rendered}}/>
+                <div className="loaderBg">
+                    <span><img src={SwordIcon} alt="" /></span>
                 </div>
-                
             </>
         )
-    }
-    return (
-        <>
-            <div className="loaderBg">
-                <span><img src={SwordIcon} alt=""/></span>
-            </div>
-        </>
-    )
     }
 }
 
@@ -341,36 +445,49 @@ export class AmlMoney extends Component {
     }
 
     componentDidMount() {
+        const apiURLs = {
+            'en': 'pages/6039',
+            'ar': 'pages/6377',
+        }
+        this.resolve(apiURLs);
         window.scrollTo(0, 0);
-        axios.get('https://www.sword-capital.com/dev/wp/wp-json/wp/v2/pages?slug=anti-money-laundering-policy-2')
-            .then(res => this.setState({
-                details: res.data,
+    }
+
+    async resolve(apiURL) {
+        try {
+            const Response = await UrlService.getData(apiURL);
+            this.setState({
+                details: Response.data,
                 isLoaded: true
-            }))
-            .catch(err => console.log(err));
+            })
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     render() {
 
-        const { details, isLoaded } = this.state;
+        const details = [];
+        details[0] = this.state.details;
+        const { isLoaded } = this.state;
         if (isLoaded) {
-            
+
             document.title = `Sword Capital | ${details[0].title.rendered}`;
+            return (
+                <>
+                    <InnerBanner img="url(https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/07/ANTI-MONEY-LAUNDERING-POLICY.jpg)" title={details[0].title.rendered} />
+                    <div className="inner-pages-text content-area">
+                        <div dangerouslySetInnerHTML={{ __html: details[0].content.rendered }} />
+                    </div>
+                </>
+            )
+        }
         return (
             <>
-                <InnerBanner img="url(https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/07/ANTI-MONEY-LAUNDERING-POLICY.jpg)" title={details[0].title.rendered} />
-                <div className="inner-pages-text content-area">
-                <div dangerouslySetInnerHTML={{__html: details[0].content.rendered}}/>
+                <div className="loaderBg">
+                    <span><img src={SwordIcon} alt="" /></span>
                 </div>
             </>
         )
-    }
-    return (
-        <>
-            <div className="loaderBg">
-                <span><img src={SwordIcon} alt=""/></span>
-            </div>
-        </>
-    )
     }
 }
