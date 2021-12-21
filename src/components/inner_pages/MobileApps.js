@@ -2,21 +2,39 @@ import React, { Component } from 'react';
 import InnerBanner from './InnerBanner';
 import SwordIcon from '../assets/sword-icon.png';
 import axios from 'axios';
+import UrlService from '../../Service';
+import CustomCookieHelper from '../Helper';
 
 export default class MobileApps extends Component {
     state = {
         details: [],
         isLoaded: false
     }
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedLang: CustomCookieHelper.HelperGetLang("selectLang")
+        };
+    }
     componentDidMount() {
+        const apiURLs = {
+            'en':'pages',
+            'ar':'pages',
+        }
+        this.resolve(apiURLs);
         window.scrollTo(0, 0);
-        axios.get('https://www.sword-capital.com/dev/wp/wp-json/wp/v2/pages')
-            .then(res => this.setState({
-                details: res.data,
+    }
+
+    async resolve(apiURL) {
+        try {
+            const Response = await UrlService.getData(apiURL);
+            this.setState({
+                details: Response.data,
                 isLoaded: true
-            }))
-            .catch(err => console.log(err));
+            })   
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     render() {
@@ -27,7 +45,169 @@ export default class MobileApps extends Component {
         document.title = `Sword Capital | Mobile Apps`;
         return (
             <>
-                <InnerBanner img="url(https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/07/MOBILE-APPS.jpg)" title="Mobile Apps" />
+            {(this.state.selectedLang === 'ar') ? <>
+            <InnerBanner img="url(https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/07/MOBILE-APPS.jpg)" title="تطبيقات الهواتف الذكية" />
+                <div className="inner-pages-text content-area">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg-12 text-center">
+                            <h2>تنزيل برامج التداول</h2>
+                            <div className="row">
+                                <div className="col-lg-4 col-md-6">
+                                    <div className="partner-box dwn-bx">
+                                        <img src="https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/07/sword-icon.png" alt=""/>
+                                        <h3>تطبيق سورد كابيتال</h3>
+                                        <p>كل ماتحتاجه على تطبيق هاتفي، يمكنك مراجعة الأخبار لحظة بلحظة، كما يمكنك الإطلاع على التقرير اليومي وتسجيل الدخول على حاسبك الشخصي وإدارة محفظتك</p>
+                                        <div className="dwn-btns">
+                                        <a className="theme-btn" href="https://play.google.com/store/apps/details?id=com.sword_capital.appv2" target="_blank" rel="noreferrer">Download Android</a>
+                                        <a className="theme-btn" href="https://apps.apple.com/us/app/sword-capital-mobile-app/id1521241135" target="_blank" rel="noreferrer">Download IOS</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4 col-md-6">
+                                    <div className="partner-box dwn-bx">
+                                        <img src="https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/07/mt5.png" alt=""/>
+                                        <h3>ميتاتريدر 5</h3>
+                                        <p>أشهر منصة تدوال في العالم ميتاتريدر 5 متوفرة الآن على الأجهزة الذكية</p>
+                                        <div className="dwn-btns">
+                                        <a className="theme-btn" href="https://download.mql5.com/cdn/mobile/mt5/android?server=SwordCapital-Live" target="_blank" rel="noreferrer">Download Android</a>
+                                        <a className="theme-btn" href="https://download.mql5.com/cdn/mobile/mt5/ios?server=SwordCapital-Live" target="_blank" rel="noreferrer">Download IOS</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4 col-md-6">
+                                    <div className="partner-box dwn-bx">
+                                        <img src="https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/07/traday.png" alt=""/>
+                                        <h3>تريداي – المفكرة الاقتصادية لفوركس</h3>
+                                        <p>مذكرة اقتصادية لاخبار البورصات العالمية</p>
+                                        <div className="dwn-btns">
+                                        <a className="theme-btn" href="https://play.google.com/store/apps/details?id=net.metaquotes.economiccalendar&hl=en&referrer=ref_id%3dfd33a3de%26utm_source%3dsupport.metaquotes.net%26utm_campaign%3d0670.en.tradays%26utm_medium%3dnews%26utm_term%3dtradays.france%26utm_content%3dinstall.app" target="_blank" rel="noreferrer">Download Android</a>
+                                        <a className="theme-btn" href="https://itunes.apple.com/us/app/tradays/id1434281988?utm_source=support.metaquotes.net&utm_campaign=0670.en.tradays&utm_medium=news&utm_term=tradays.france&utm_content=install.app" target="_blank" rel="noreferrer">Download IOS</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4 col-md-6">
+                                    <div className="partner-box dwn-bx">
+                                        <img src="https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/07/bloomerge.png" alt=""/>
+                                        <h3>تطبيق بلومبيرق</h3>
+                                        <div className="dwn-btns">
+                                        <a className="theme-btn" href="https://play.google.com/store/apps/details?id=com.bloomberg.android" target="_blank" rel="noreferrer">Download Android</a>
+                                        <a className="theme-btn" href="https://itunes.apple.com/us/app/bloomberg/id281941097?mt=8" target="_blank" rel="noreferrer">Download IOS</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4 col-md-6">
+                                    <div className="partner-box dwn-bx">
+                                        <img src="https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/07/cnbc.jpg" alt=""/>
+                                        <h3>CNBC App</h3>
+                                        <div className="dwn-btns">
+                                        <a className="theme-btn" href="https://play.google.com/store/apps/details?id=com.cnbc.client&hl=en" target="_blank" rel="noreferrer">Download Android</a>
+                                        <a className="theme-btn" href="https://itunes.apple.com/au/app/cnbc-real-time-for-ipad/id398018310?mt=8" target="_blank" rel="noreferrer">Download IOS</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4 col-md-6">
+                                    <div className="partner-box dwn-bx">
+                                        <img src="https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/07/icon-mt4.png" alt=""/>
+                                        <h3>ميتاتريدر 4</h3>
+                                        <p>أشهر منصة تدوال في العالم ميتاتريدر 4 متوفرة الآن على الأجهزة الذكية</p>
+                                        <div className="dwn-btns">
+                                        <a className="theme-btn" href="https://play.google.com/store/apps/details?id=net.metaquotes.metatrader4" target="_blank" rel="noreferrer">Download Android</a>
+                                        <a className="theme-btn" href="https://apps.apple.com/us/app/metatrader-4/id496212596" target="_blank" rel="noreferrer">Download IOS</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4 col-md-6">
+                                    <div className="partner-box dwn-bx">
+                                        <img src="https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/07/mobile-charts.png" alt=""/>
+                                        <h3>رسوم بيانية للهواتف الذكية</h3>
+                                        <p>Trade Interceptor Forex Mobile is a MULTI-BROKER FOREX AND CFD TRADING PLATFORM, which is offered to traders for FREE.</p>
+                                        <div className="dwn-btns">
+                                        <a className="theme-btn" href="https://play.google.com/store/apps/details?id=com.riflexo.tradeinterceptormobile&hl=en" target="_blank" rel="noreferrer">Download Android</a>
+                                        <a className="theme-btn" href="https://itunes.apple.com/us/app/trade-interceptor-forex-mobile/id329476057?mt=8" target="_blank" rel="noreferrer">Download IOS</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4 col-md-6">
+                                    <div className="partner-box dwn-bx">
+                                        <img src="https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/07/reuters-app.png" alt=""/>
+                                        <h3>تطبيق رويتر</h3>
+                                        <p>اتصل بالشبكة الاحترافية لأخبار ومعلومات أسواق المالي المقدمة لكم عن طريق شركة توماس رويتر، المصدر الأول عالميا للأخبار الاقتصادية</p>
+                                        <div className="dwn-btns">
+                                        <a className="theme-btn" href="https://itunes.apple.com/app/reuters-news-pro-for-ipad/id363274833?mt=8" target="_blank" rel="noreferrer">Download IOS</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4 col-md-6">
+                                    <div className="partner-box dwn-bx">
+                                        <img src="https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/07/seeking-alpha.png" alt=""/>
+                                        <h3>Seeking Alpha</h3>
+                                        <p>تمتع بوصول سريع لجميع مايتعلق بالمعلومات الاستثمارية وأخبار أسواق المال العالمية مع تطريق “سيكينق آلفا” المصدر الأول عاليماَ في مجال المعلومات الاستثمارية</p>
+                                        <div className="dwn-btns">
+                                        <a className="theme-btn" href="https://play.google.com/store/apps/details?id=com.seekingalpha.webwrapper&hl=en" target="_blank" rel="noreferrer">Download Android</a>
+                                        <a className="theme-btn" href="https://itunes.apple.com/us/app/seeking-alpha-portfolio-for/id624497238?mt=8" target="_blank" rel="noreferrer">Download IOS</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4 col-md-6">
+                                    <div className="partner-box dwn-bx">
+                                        <img src="https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/07/trader-clock.jpg" alt=""/>
+                                        <h3>Trader Clock</h3>
+                                        <p>أنه التطبيق الأهم لكل متداول، إن كنت متداول ف”تريدير كلوك” ماتحتاجه معك دائماَ</p>
+                                        <div className="dwn-btns">
+                                        <a className="theme-btn" href="https://itunes.apple.com/us/app/trader-clock-market-hours/id564139254?mt=8" target="_blank" rel="noreferrer">Download IOS</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4 col-md-6">
+                                    <div className="partner-box dwn-bx">
+                                        <img src="https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/07/tws-handy.jpg" alt=""/>
+                                        <h3>TWS Handy Trader</h3>
+                                        <p>منصة “TWS هاندي تنريدير” توفر للمستثمر التجارة في الفوركس، العقود مقابل الفروقات، صناديق الاستثمار المتداولة، الأسهم، العقود الآجلة، الخيارات والسندات وغيرها من المشتقات من خلال عدد كبير من أسواق المال العالمية</p>
+                                        <div className="dwn-btns">
+                                        <a className="theme-btn" href="https://play.google.com/store/apps/details?id=handytrader.app" target="_blank" rel="noreferrer">Download Android</a>
+                                        <a className="theme-btn" href="https://itunes.apple.com/us/app/handy-trader/id429530128?mt=8" target="_blank" rel="noreferrer">Download IOS</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4 col-md-6">
+                                    <div className="partner-box dwn-bx">
+                                        <img src="https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/07/yahoo.png" alt=""/>
+                                        <h3>تطبيق ياهوو! المالي</h3>
+                                        <p>The Yahoo! Finance App for the iPhone and iPod Touch brings you total coverage from your favorite financial source.</p>
+                                        <div className="dwn-btns">
+                                        <a className="theme-btn" href="https://itunes.apple.com/us/app/yahoo!-finance/id328412701?mt=8" target="_blank" rel="noreferrer">Download IOS</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4 col-md-6">
+                                    <div className="partner-box dwn-bx">
+                                        <img src="https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/07/zulu.png" alt=""/>
+                                        <h3>ZuluTrade</h3>
+                                        <p>ZuluTrade is the largest social trading community, with thousands of talented currency traders from 192 countries to follow in real time.</p>
+                                        <div className="dwn-btns">
+                                        <a className="theme-btn" href="https://itunes.apple.com/us/app/zulutrade/id336913058?mt=8" target="_blank" rel="noreferrer">Download IOS</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4 col-md-6">
+                                    <div className="partner-box dwn-bx">
+                                        <img src="https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/07/investing.png" alt=""/>
+                                        <h3>Investing App</h3>
+                                        <p>انظم لمئات الآلاف من مستخدمي تطبيق “انفستنق” لتكون على اطلاع مستمر بالأمور المالية والاستثمارية</p>
+                                        <div className="dwn-btns">
+                                        <a className="theme-btn" href="https://play.google.com/store/apps/details?id=com.fusionmedia.investing&&referrer=utm_content%3D0081eec2-cc19-41d0-b945-d8c83b4e9eed%26utm_medium%3Dad-analytics%26utm_source%3Dflurry%26utm_campaign%3DEN%252520-Webmaster%252520tools" target="_blank" rel="noreferrer">Download Android</a>
+                                        <a className="theme-btn" href="https://itunes.apple.com/app/id909998122?mt=8&&referrer=click%3Dfe9da152-4fc1-434a-8671-bd5f1c0ae485" target="_blank" rel="noreferrer">Download IOS</a>
+                                        </div>  
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </> : <>
+            <InnerBanner img="url(https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/07/MOBILE-APPS.jpg)" title="Mobile Apps" />
                 <div className="inner-pages-text content-area">
                     <div className="container">
                         <div className="row">
@@ -189,6 +369,7 @@ export default class MobileApps extends Component {
                         </div>
                     </div>
                 </div>
+            </> }
             </>
         )
     }

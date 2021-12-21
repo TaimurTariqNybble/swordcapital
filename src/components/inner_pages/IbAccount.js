@@ -2,21 +2,33 @@ import React, { Component } from 'react';
 import InnerBanner from './InnerBanner';
 import SwordIcon from '../assets/sword-icon.png';
 import axios from 'axios';
-
+import CustomCookieHelper from '../Helper';
+import UrlService from '../../Service';
 export class IbAccount extends Component {
     state = {
         details: [],
         isLoader: false
     }
-
+    
     componentDidMount() {
+        const apiURLs = {
+            'en':'pages/6013',
+            'ar':'pages/6435',
+        }
+        this.resolve(apiURLs);
         window.scrollTo(0, 0);
-        axios.get('https://www.sword-capital.com/dev/wp/wp-json/wp/v2/pages?slug=introducing-brokers-2')
-            .then(res => this.setState({
-                details: res.data,
+    }
+
+    async resolve(apiURL) {
+        try {
+            const Response = await UrlService.getData(apiURL);
+            this.setState({
+                details: Response.data,
                 isLoader: true
-            }))
-            .catch(err => console.log(err));
+            })   
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     constructor(props) {
@@ -172,13 +184,14 @@ export class IbAccount extends Component {
         })
         .catch(err => {
             this.setState({isLoading: false})
-            console.log(err)
         });
     }
 
     render() {
 
-        const { details, isLoader } = this.state;
+        const details = [];
+        details[0] = this.state.details;
+        const { isLoader } = this.state;
 
         if (isLoader) {
 
@@ -458,13 +471,24 @@ export class PersonalAccount extends Component {
     }
 
     componentDidMount() {
+        const apiURLs = {
+            'en':'pages',
+            'ar':'pages',
+        }
+        this.resolve(apiURLs);
         window.scrollTo(0, 0);
-        axios.get('https://www.sword-capital.com/wp-json/wp/v2/pages')
-            .then(res => this.setState({
-                details: res.data,
+    }
+
+    async resolve(apiURL) {
+        try {
+            const Response = await UrlService.getData(apiURL);
+            this.setState({
+                details: Response.data,
                 isLoaded: true
-            }))
-            .catch(err => console.log(err));
+            })   
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     constructor(props) {
@@ -713,13 +737,24 @@ export class CorpAccount extends Component {
     }
 
     componentDidMount() {
+        const apiURLs = {
+            'en':'pages',
+            'ar':'pages',
+        }
+        this.resolve(apiURLs);
         window.scrollTo(0, 0);
-        axios.get('https://www.sword-capital.com/wp-json/wp/v2/pages')
-            .then(res => this.setState({
-                about: res.data,
+    }
+
+    async resolve(apiURL) {
+        try {
+            const Response = await UrlService.getData(apiURL);
+            this.setState({
+                details: Response.data,
                 isLoader: true
-            }))
-            .catch(err => console.log(err));
+            })   
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     constructor(props) {
@@ -1166,13 +1201,24 @@ export class LowAccount extends Component {
     }
 
     componentDidMount() {
+        const apiURLs = {
+            'en':'pages',
+            'ar':'pages',
+        }
+        this.resolve(apiURLs);
         window.scrollTo(0, 0);
-        axios.get('https://www.sword-capital.com/wp-json/wp/v2/pages')
-            .then(res => this.setState({
-                about: res.data,
+    }
+
+    async resolve(apiURL) {
+        try {
+            const Response = await UrlService.getData(apiURL);
+            this.setState({
+                details: Response.data,
                 isLoader: true
-            }))
-            .catch(err => console.log(err));
+            })   
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     constructor(props) {
@@ -1627,13 +1673,24 @@ export class PremAccount extends Component {
     }
 
     componentDidMount() {
+        const apiURLs = {
+            'en':'pages',
+            'ar':'pages',
+        }
+        this.resolve(apiURLs);
         window.scrollTo(0, 0);
-        axios.get('https://www.sword-capital.com/wp-json/wp/v2/pages')
-            .then(res => this.setState({
-                details: res.data,
+    }
+
+    async resolve(apiURL) {
+        try {
+            const Response = await UrlService.getData(apiURL);
+            this.setState({
+                details: Response.data,
                 isLoader: true
-            }))
-            .catch(err => console.log(err));
+            })   
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     constructor(props) {
@@ -2072,13 +2129,24 @@ export class VipAccount extends Component {
     }
 
     componentDidMount() {
+        const apiURLs = {
+            'en':'pages',
+            'ar':'pages',
+        }
+        this.resolve(apiURLs);
         window.scrollTo(0, 0);
-        axios.get('https://www.sword-capital.com/wp-json/wp/v2/pages')
-            .then(res => this.setState({
-                details: res.data,
+    }
+
+    async resolve(apiURL) {
+        try {
+            const Response = await UrlService.getData(apiURL);
+            this.setState({
+                details: Response.data,
                 isLoader: true
-            }))
-            .catch(err => console.log(err));
+            })   
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     constructor(props) {
@@ -2521,13 +2589,24 @@ export class DemoAccount extends Component {
     }
 
     componentDidMount() {
+        const apiURLs = {
+            'en':'pages',
+            'ar':'pages',
+        }
+        this.resolve(apiURLs);
         window.scrollTo(0, 0);
-        axios.get('https://www.sword-capital.com/wp-json/wp/v2/pages')
-            .then(res => this.setState({
-                details: res.data,
+    }
+
+    async resolve(apiURL) {
+        try {
+            const Response = await UrlService.getData(apiURL);
+            this.setState({
+                details: Response.data,
                 isLoaded: true
-            }))
-            .catch(err => console.log(err));
+            })   
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     render() {

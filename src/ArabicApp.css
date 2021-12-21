@@ -1,0 +1,38 @@
+.ar .content-area{
+    direction: rtl;
+    text-align: right;
+}
+.inner-pages-text.content-area-sec-b{
+    direction: rtl;
+}
+.ar .inner-banner h1 {text-align: right;position: relative;}
+.ar .inner-banner h1:after {
+    position: absolute;
+    right: 0;
+}
+.ar .inner-list li:before {
+    right: -20px;
+    left: auto;
+}
+.ar form {
+    direction: ltr !important;
+    text-align: left !important;
+}
+.ar .theme-acc .card-header button {
+    text-align: right;
+}
+.ar ul.main-nav {
+    direction: rtl;
+}
+.ar footer {
+    direction: rtl;
+    text-align: right;
+}
+
+.ar footer ul {
+    padding-right: 0;
+}
+
+.ar footer ul li span {
+    margin-left: 10px;
+}

@@ -3,6 +3,7 @@ import InnerBanner from './InnerBanner';
 import SwordIcon from '../assets/sword-icon.png';
 import axios from 'axios';
 import {Link} from "react-router-dom";
+import CustomCookieHelper from '../Helper';
 
 export default class Downloads extends Component {
     state = {
@@ -11,8 +12,14 @@ export default class Downloads extends Component {
     }
 
     componentDidMount() {
+        const selectedLang = CustomCookieHelper.HelperGetLang("selectLang");
+        const apiURLs = {
+            'en':'https://www.sword-capital.com/dev/wp/wp-json/wp/v2/pages?slug=home',
+            'ar':'https://www.sword-capital.com/dev/wp/wp-json/wp/v2/pages?slug=home',
+        }
+        const apiURL = apiURLs[selectedLang];
         window.scrollTo(0, 0);
-        axios.get('https://www.sword-capital.com/dev/wp/wp-json/wp/v2/pages')
+        axios.get(apiURL)
             .then(res => this.setState({
                 details: res.data,
                 isLoaded: true

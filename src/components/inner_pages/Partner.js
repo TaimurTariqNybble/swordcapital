@@ -3,6 +3,8 @@ import InnerBanner from './InnerBanner';
 import SwordIcon from '../assets/sword-icon.png';
 import axios from 'axios';
 import {Link} from "react-router-dom";
+import UrlService from '../../Service';
+import CustomCookieHelper from '../Helper';
 
 export default class Partner extends Component {
 
@@ -11,19 +13,39 @@ export default class Partner extends Component {
         isLoaded: false
     }
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedLang: CustomCookieHelper.HelperGetLang("selectLang")
+        };
+    }
+
     componentDidMount() {
+        const apiURLs = {
+            'en':'pages/6005',
+            'ar':'pages/6403',
+        }
+        this.resolve(apiURLs);
         window.scrollTo(0, 0);
-        axios.get('https://www.sword-capital.com/dev/wp/wp-json/wp/v2/pages?slug=partners-center')
-            .then(res => this.setState({
-                details: res.data,
+    }
+
+    async resolve(apiURL) {
+        try {
+            const Response = await UrlService.getData(apiURL);
+            this.setState({
+                details: Response.data,
                 isLoaded: true
-            }))
-            .catch(err => console.log(err));
+            })   
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     render() {
 
-        const { details, isLoaded } = this.state;
+        const details = [];
+        details[0] = this.state.details;
+        const { isLoaded } = this.state;
         if (isLoaded) {
             const BannerBg = `url(${details[0].acf.banner_image})`;
             document.title = `Sword Capital | ${details[0].title.rendered}`;
@@ -33,6 +55,63 @@ export default class Partner extends Component {
                 <div className="inner-pages-text content-area">
                     <div dangerouslySetInnerHTML={{__html: details[0].content.rendered}}/>
                 </div>
+                {(this.state.selectedLang === 'ar') ? <>
+                    <div className="inner-pages-text content-area-sec-b">
+                        <div className="container">
+                            <div className="row justify-content-center">
+                                <div className="col-lg-3 col-md-4 col-sm-6">
+                                    <div className="partner-box">
+                                        <img src={SwordIcon} alt=""/>
+                                        <h3>ميتاتريدر 5 للمؤسسات</h3>
+                                        <Link to="/partners/mt4-white-label" className="theme-btn">بداية</Link>
+                                    </div>
+                                </div>
+                                <div className="col-lg-3 col-md-4 col-sm-6">
+                                    <div className="partner-box">
+                                        <img src={SwordIcon} alt=""/>
+                                        <h3>TWS® للمؤسسات</h3>
+                                        <Link to="/partners/tws-trader" className="theme-btn">بداية</Link>
+                                    </div>
+                                </div>
+                                <div className="col-lg-3 col-md-4 col-sm-6">
+                                    <div className="partner-box">
+                                        <img src={SwordIcon} alt=""/>
+                                        <h3>وسيط التعريف</h3>
+                                        <Link to="/partners/ib-account" className="theme-btn">بداية</Link>
+                                    </div>
+                                </div>
+                                <div className="col-lg-3 col-md-4 col-sm-6">
+                                    <div className="partner-box">
+                                        <img src={SwordIcon} alt=""/>
+                                        <h3>العلامة التجارية سورد</h3>
+                                        <Link to="/partners/franchises-brokerage" className="theme-btn">بداية</Link>
+                                    </div>
+                                </div>
+                                <div className="col-lg-3 col-md-4 col-sm-6">
+                                    <div className="partner-box">
+                                        <img src={SwordIcon} alt=""/>
+                                        <h3>افتح مكتب وساطة خاص بشركتك</h3>
+                                        <Link to="/partners/open-your-office" className="theme-btn">بداية</Link>
+                                    </div>
+                                </div>
+                                <div className="col-lg-3 col-md-4 col-sm-6">
+                                    <div className="partner-box">
+                                        <img src={SwordIcon} alt=""/>
+                                        <h3>شارك سورد</h3>
+                                        <Link to="/partners/corporation-with-us" className="theme-btn">بداية</Link>
+                                    </div>
+                                </div>
+                                <div className="col-lg-3 col-md-4 col-sm-6">
+                                    <div className="partner-box">
+                                        <img src={SwordIcon} alt=""/>
+                                        <h3>وظائف</h3>
+                                        <Link to="/partners/apply-job" className="theme-btn">بداية</Link>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </> : <>
                 <div className="inner-pages-text content-area-sec-b">
                     <div className="container">
                         <div className="row justify-content-center">
@@ -88,6 +167,7 @@ export default class Partner extends Component {
                         </div>
                     </div>
                 </div>
+                </> }
                 
             </>
         )

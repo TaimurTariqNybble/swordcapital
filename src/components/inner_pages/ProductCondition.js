@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import InnerBanner from './InnerBanner';
 import SwordIcon from '../assets/sword-icon.png';
 import axios from 'axios';
+import UrlService from '../../Service';
 
 export default class ProductCondition extends Component {
     state = {
@@ -10,24 +11,37 @@ export default class ProductCondition extends Component {
     }
 
     componentDidMount() {
+        const apiURLs = {
+            'en':'pages/6019',
+            'ar':'pages/6397',
+        }
+        this.resolve(apiURLs);
         window.scrollTo(0, 0);
-        axios.get('https://www.sword-capital.com/dev/wp/wp-json/wp/v2/pages?slug=products-condition-2')
-            .then(res => this.setState({
-                details: res.data,
+    }
+
+    async resolve(apiURL) {
+        try {
+            const Response = await UrlService.getData(apiURL);
+            this.setState({
+                details: Response.data,
                 isLoaded: true
-            }))
-            .catch(err => console.log(err));
+            })   
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     render() {
 
-        const { details,isLoaded } = this.state;
+        const details = [];
+        details[0] = this.state.details;
+        const { isLoaded } = this.state;
         if (isLoaded) {
-            
-        document.title = `Sword Capital | Products Condition`;
+        const BannerBg = `url(${details[0].acf.banner_image})`;
+            document.title = `Sword Capital | ${details[0].title.rendered}`;
         return (
             <>
-                <InnerBanner img="url(https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/07/PRODUCTS-CONDITION.jpg)" title="Products Condition" />
+                <InnerBanner img={BannerBg} title={details[0].title.rendered} />
                 <div className="inner-pages-text content-area">
                     <div dangerouslySetInnerHTML={{__html: details[0].content.rendered}}/>
                 </div>

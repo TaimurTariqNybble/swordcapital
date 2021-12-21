@@ -1,4 +1,5 @@
 import './App.css';
+import './ArabicApp.css';
 import {Header, InnerHeader} from './components/Header';
 import HomePage from './components/HomePage';
 import Partner from './components/inner_pages/Partner';
