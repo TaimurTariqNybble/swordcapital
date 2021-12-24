@@ -42,6 +42,7 @@
         ]
     },
     "proxy": "https://sword-capital.com/",
+    "homepage": "https://sword-capital.com/dev",
     "devDependencies": {
         "dotenv-cli": "^4.0.0"
     }

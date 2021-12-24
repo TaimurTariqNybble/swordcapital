@@ -6,13 +6,19 @@ import {
 import SwordIcon from '../assets/sword-icon.png';
 import axios from 'axios';
 import UrlService from '../../Service';
+import CustomCookieHelper from '../Helper';
 
 export class Download extends Component {
     state = {
         details: [],
         isLoaded: false
     }
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedLang: CustomCookieHelper.HelperGetLang("selectLang")
+        };
+    }
     componentDidMount() {
         const apiURLs = {
             'en':'pages',
@@ -40,6 +46,67 @@ export class Download extends Component {
         if (isLoaded) {
         return (
             <>
+                {(this.state.selectedLang === 'ar') ? <>
+                <InnerBanner img="url(https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/07/TRADER.jpg)" title="ميتاترادر 4" />
+                <div className="inner-pages-text content-area">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg-7">
+                            <h2>ميتاترادر 4</h2>
+                            <p>من أجل التداول في السوق المالية ، يحتاج المتداولون إلى برنامج يسمح لهم بتحليل الأسعار وإجراء الصفقات وتطوير الاستراتيجيات. يحتاجون أيضًا إلى التحكم في حسابات التداول الخاصة بهم باستخدام نوع من الأجهزة المحمولة. مجموعة أخرى من الحسابات التي تحتاج إلى إدارتها هي حسابات المستثمرين. كل ما سبق يمكن معالجته بواسطة MetaTrader 4. مع MetaTrader 4 ، يمكنك الحصول على كل هذا أيضًا!</p>
+                            <a href="https://www.youtube.com/user/MetaQuotesOfficial" target="_blank" rel="noreferrer" class="theme-btn">تعرف على MT4 (فيديوات تعليمة)</a>
+                            </div>
+                            <div className="col-lg-5">
+                                <img src="https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/08/Screen-Shot-2014-09-21-at-11.07.27-PM.png" className="img-fluid" alt=""/>
+                            </div>
+                        </div>
+                        <div className="row justify-content-center">
+                            <div className="col-lg-4 col-md-4 col-sm-6">
+                                <div className="partner-box">
+                                <img src={SwordIcon} alt=""/>
+                                    <h3>افتح حساب MT4</h3>
+                                    <Link className="theme-btn" to="/open-accounts/personal-account/">Start</Link>
+                                </div>
+                            </div>
+                            <div className="col-lg-4 col-md-4 col-sm-6">
+                                <div className="partner-box">
+                                <img src={SwordIcon} alt=""/>
+                                    <h3>قم بتنزيل MT4 للكمبيوتر الشخصي</h3>
+                                    <a className="theme-btn" href="https://download.mql5.com/cdn/web/sword.investment.capital/mt4/sword4setup.exe" target="_blank" rel="noreferrer" >تحميل</a>
+                                </div>
+                            </div>
+                            <div className="col-lg-4 col-md-4 col-sm-6">
+                                <div className="partner-box">
+                                <img src={SwordIcon} alt=""/>
+                                    <h3>تسجيل الدخول إلى MT4 WebTrader</h3>
+                                    <a className="theme-btn" href="https://trade.mql5.com/trade?servers=Sword-Demo,Sword-Live" target="_blank" rel="noreferrer" >تسجيل الدخول</a>
+                                </div>
+                            </div>
+                            <div className="col-lg-4 col-md-4 col-sm-6">
+                                <div className="partner-box">
+                                <img src={SwordIcon} alt=""/>
+                                    <h3>قم بتنزيل MT4 لأجهزة iPhone و Ipad</h3>
+                                    <p> (اسم الخادم: sword)</p>
+                                    <a className="theme-btn" href="https://apps.apple.com/us/app/metatrader-4/id496212596" target="_blank" rel="noreferrer" >تحميل</a>
+                                </div>
+                            </div>
+                            <div className="col-lg-4 col-md-4 col-sm-6">
+                                <div className="partner-box">
+                                <img src={SwordIcon} alt=""/>
+                                    <h3>حمل MT4 لأجهزة Android.</h3>
+                                    <p> (اسم الخادم: sword)</p>
+                                    <a className="theme-btn" href="https://play.google.com/store/apps/details?id=net.metaquotes.metatrader4" target="_blank" rel="noreferrer" >تحميل</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="row" style={{marginTop:"50px"}}>
+                            <div className="col-lg-12">
+                            <p>بعد أن تقوم بتنزيل النظام على جوالك أو كمبيوترك ، فإنك تحتاج إلى إدخال اسم المستخدم وكلمة المرور الخاصة بك ، واسم الخادم هو sword-live للحصول على حساب حقيقي و sword-demo للحساب التجريبي.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </> : <>
                 <InnerBanner img="url(https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/07/TRADER.jpg)" title="MetaTrader4" />
                 <div className="inner-pages-text content-area">
                     <div className="container">
@@ -99,6 +166,7 @@ export class Download extends Component {
                         </div>
                     </div>
                 </div>
+                </>}
             </>
         )
     }
@@ -118,7 +186,12 @@ export class MetaTrader5 extends Component {
         details: [],
         isLoaded: false
     }
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedLang: CustomCookieHelper.HelperGetLang("selectLang")
+        };
+    }
     componentDidMount() {
         const apiURLs = {
             'en':'pages',
@@ -146,6 +219,60 @@ export class MetaTrader5 extends Component {
         if (isLoaded) {
         return (
             <>
+                {(this.state.selectedLang === 'ar') ? <>
+                <InnerBanner img="url(https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/07/TRADER.jpg)" title="ميتاترادر 5" />
+                <div className="inner-pages-text content-area">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg-7">
+                            <h2>ميتاترادر 5</h2>
+                            <p>من أجل التجارة في السوق المالية ، يحتاج التجار إلى برنامج يسمح لهم بتحليل الأسعار وإجراء الصفقات ووضع الاستراتيجيات. كما يحتاجون أيضًا إلى التحكم في حسابات التداول الخاصة بهم عن طريق استخدام الهواتف الذكية. نوع أخرى من الحسابات الذي يحتاج إلى أن يدار هو حسابات المستثمرين. يمكن التعامل مع كل ما سبق بواسطة MetaTrader 5. مع MetaTrader 5 ، يمكنك الحصول على كل هذا!</p>
+                            <a href="https://www.youtube.com/user/MetaQuotesOfficial" target="_blank" rel="noreferrer" class="theme-btn">تعرف على MT5 (فيديوات تعليمة)</a>
+                            </div>
+                            <div className="col-lg-5">
+                                <img src="https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/08/Screen-Shot-2014-09-21-at-11.07.27-PM.png" className="img-fluid" alt=""/>
+                            </div>
+                        </div>
+                        <div className="row justify-content-center">
+                            <div className="col-sm-6">
+                                <div className="partner-box">
+                                <img src={SwordIcon} alt=""/>
+                                    <h3>فتح حساب MT5</h3>
+                                    <Link className="theme-btn" to="/open-accounts/personal-account/">بداية</Link>
+                                </div>
+                            </div>
+                            <div className=" col-sm-6">
+                                <div className="partner-box">
+                                <img src={SwordIcon} alt=""/>
+                                    <h3>تحميل MT5 لأجهزة الكمبيوتر</h3>
+                                    <a className="theme-btn" href="https://download.mql5.com/cdn/web/11668/mt5/swordcapital5setup.exe" target="_blank" rel="noreferrer" >تحميل</a>
+                                </div>
+                            </div>
+                            <div className="col-sm-6">
+                                <div className="partner-box">
+                                <img src={SwordIcon} alt=""/>
+                                    <h3>حمل MT5 لأجهزة Iphone & Ipad.</h3>
+                                    <p> (اسم الخادم: sword)</p>
+                                    <a className="theme-btn" href="https://download.mql5.com/cdn/mobile/mt5/ios?server=SwordCapital-Live" target="_blank" rel="noreferrer" >تحميل</a>
+                                </div>
+                            </div>
+                            <div className="col-sm-6">
+                                <div className="partner-box">
+                                <img src={SwordIcon} alt=""/>
+                                    <h3>حمل MT5 لأجهزة Android</h3>
+                                    <p> (اسم الخادم: sword)</p>
+                                    <a className="theme-btn" href="https://download.mql5.com/cdn/mobile/mt5/android?server=SwordCapital-Live" target="_blank" rel="noreferrer" >تحميل</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="row" style={{marginTop:"50px"}}>
+                            <div className="col-lg-12">
+                            <p>بعد أن تقوم بتنزيل النظام على جوالك أو كمبيوترك ، فإنك تحتاج إلى إدخال اسم المستخدم وكلمة المرور الخاصة بك ، واسم الخادم هو sword-live للحصول على حساب حقيقي و sword-demo للحساب التجريبي.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </> : <>
                 <InnerBanner img="url(https://www.sword-capital.com/dev/wp/wp-content/uploads/2021/07/TRADER.jpg)" title="MetaTrader5" />
                 <div className="inner-pages-text content-area">
                     <div className="container">
@@ -198,6 +325,7 @@ export class MetaTrader5 extends Component {
                         </div>
                     </div>
                 </div>
+                </> }
             </>
         )
     }

@@ -100,7 +100,7 @@ export default class Footer extends Component {
                                     <a href="/"> <img src={Logo} alt=""/></a>
                                 </div>
                                 <div className="footer-box-text">
-                                    <p>Sword Capital is a registered and reserved Trademark for Sword Capital Companies worldwide, working in the field of International Financial Brokerage. It also serves its clients from individuals and financial institutions in Asia, Africa, Europe, Australia, South America.</p>
+                                    <p>سورد كابيتال هي علامة تجارية مسجلة ومحفوظة لشركات سورد كابيتال في جميع أنحاء العالم ، وتعمل في مجال الوساطة المالية الدولية. كما تخدم عملائها من الأفراد والمؤسسات المالية في آسيا وإفريقيا وأوروبا وأستراليا وأمريكا الجنوبية.</p>
                                 </div>
                                 <ul className="footer-box-list">
                                     <li><span><img src={CallImg} alt=""/></span><a className="clr" href="tel:+96522468817">+965-2246-8817 </a></li>

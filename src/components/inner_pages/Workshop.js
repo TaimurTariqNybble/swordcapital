@@ -12,7 +12,7 @@ export default class Workshop extends Component {
     
     componentDidMount() {
         const apiURLs = {
-            'en':'pages6013',
+            'en':'pages/6013',
             'ar':'pages/6435',
         }
         this.resolve(apiURLs);
